@@ -2,30 +2,32 @@ package modelos;
 
 public class Usuario {
 
-	private String id_card;
-	private String nombre;
-	private int pin;
-	private String dni;
-	private Admin id_admin;
+	protected String id_card;
+	protected String nombre;
+	protected int pin;
+	protected String DNI;
+	protected Admin Admin;
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nombre, int pin, String dni) {
+	public Usuario(String id_card, int pin) {
 		super();
-		this.nombre = nombre;
+		this.id_card = id_card;
 		this.pin = pin;
-		this.dni = dni;
+		
 	}
 
-	public Usuario(String id_card, String nombre, int pin, String dni, Admin id_admin) {
+	
+
+	public Usuario(String id_card, String nombre, int pin, String dNI, Admin id_Admin) {
 		super();
 		this.id_card = id_card;
 		this.nombre = nombre;
 		this.pin = pin;
-		this.dni = dni;
-		this.id_admin = id_admin;
+		DNI = dNI;
+		this.Admin = id_Admin;
 	}
 
 	public String getId_card() {
@@ -52,26 +54,55 @@ public class Usuario {
 		this.pin = pin;
 	}
 
-	public String getDni() {
-		return dni;
+	
+
+	
+	public String getDNI() {
+		return DNI;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDNI(String dNI) {
+		DNI = dNI;
 	}
 
-	public Admin getId_admin() {
-		return id_admin;
+	public Admin getId_Admin() {
+		return Admin;
 	}
 
-	public void setId_admin(Admin id_admin) {
-		this.id_admin = id_admin;
+	public void setId_Admin(Admin id_Admin) {
+		this.Admin = id_Admin;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id_card == null) ? 0 : id_card.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id_card == null) {
+			if (other.id_card != null)
+				return false;
+		} else if (!id_card.equals(other.id_card))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id_card=" + id_card + ", nombre=" + nombre + ", pin=" + pin + ", dni=" + dni + ", id_admin="
-				+ id_admin + "]";
+		return "Usuario [id_card=" + id_card + ", nombre=" + nombre + ", pin=" + pin + ", DNI=" + DNI + ", id_Admin="
+				+ Admin + "]";
 	}
+
 
 }
