@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import conexionBD.Conexion;
 import conexionBD.UtilidadXml;
@@ -118,6 +117,7 @@ public class AdminDAO extends Admin{
 			Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 			
 			AdminDAO a = new AdminDAO();
+			AdminDAO b = new AdminDAO(id, pin);
 			boolean result = false;
 			if (con != null) {
 				try {
@@ -131,7 +131,7 @@ public class AdminDAO extends Admin{
 						a.setPin(rs.getInt("pin"));
 					}
 					
-						if (a != null) {
+						if (a.equals(b)) {
 							result = true;
 						}
 				} catch (SQLException e) {

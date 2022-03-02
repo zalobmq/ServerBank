@@ -58,7 +58,7 @@ public class UsuarioDAO extends Usuario{
 				q.setString(2, this.nombre);
 				q.setInt(3, this.pin);
 				q.setString(4, this.DNI);
-				q.setInt(5, 1);
+				q.setInt(5, this.Admin.getId());
 				
 				result = q.executeUpdate();
 				
@@ -102,7 +102,7 @@ public class UsuarioDAO extends Usuario{
 	 * Recibe un String id_card
 	 * Devuelve un UsuarioDAO
 	 */
-	public static UsuarioDAO getUsusarioPorId_card(String id_card) {
+	public static UsuarioDAO getUsuarioPorId_card(String id_card) {
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		UsuarioDAO result = new UsuarioDAO();
 
@@ -114,7 +114,7 @@ public class UsuarioDAO extends Usuario{
 				while (rs.next()) {
 					result.setId_card(rs.getString("id_card"));
 					result.setNombre(rs.getString("nombre"));
-					result.setPin(rs.getInt("edad"));
+					result.setPin(rs.getInt("pin"));
 					result.setDNI(rs.getString("DNI"));
 					result.setId_Admin(AdminDAO.getAdminPorId(rs.getInt("id_Admin")));
 
@@ -142,7 +142,7 @@ public class UsuarioDAO extends Usuario{
 				ResultSet rs = q.executeQuery();
 				while (rs.next()) {
 					Usuario cl = new Usuario();
-					cl.setId_card(rs.getString("id-card"));
+					cl.setId_card(rs.getString("id_card"));
 					cl.setNombre(rs.getString("nombre"));
 					cl.setPin(rs.getInt("pin"));
 					cl.setDNI(rs.getString("DNI"));
@@ -166,15 +166,16 @@ public class UsuarioDAO extends Usuario{
 	 * Devuelve un Boolean true si el usuario con ese id tiene ese pin.
 	 * 
 	 */
-	public static Boolean comprobarPin(int id, int pin) {
+	public static Boolean comprobarPin(String id_card, int pin) {
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		
 		UsuarioDAO a = new UsuarioDAO();
+		UsuarioDAO b = new UsuarioDAO(id_card, pin);
 		boolean result = false;
 		if (con != null) {
 			try {
 				PreparedStatement q = con.prepareStatement(COMPROBAR_PIN);
-				q.setInt(1, id);
+				q.setString(1, id_card);
 				q.setInt(2, pin);
 				ResultSet rs = q.executeQuery();
 				
@@ -183,7 +184,7 @@ public class UsuarioDAO extends Usuario{
 					a.setPin(rs.getInt("pin"));
 				}
 				
-					if (a != null) {
+					if (a.equals(b)) {
 						result = true;
 					}
 			} catch (SQLException e) {
