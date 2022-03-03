@@ -36,7 +36,7 @@ public class Pruebas {
 		CuentaDAO c = new CuentaDAO(1200, u);
 		//c.añadir();
 		
-		//c.Insertar_Retirar(1, false, 2000f);
-		System.out.println(c.verSaldoCuenta());
+		c.Insertar_Retirar(2, true, 2000f);
+		//System.out.println(c.verSaldoCuenta());
 	}
 }

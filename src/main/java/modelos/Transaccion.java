@@ -1,25 +1,25 @@
 package modelos;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Transaccion {
 
-	private int id;
-	private float importe;
-	private boolean tipo;
-	private LocalDate fecha;
-	private Cuenta id_cuenta;
+	protected int id;
+	protected float importe;
+	//INGRESAR -> true , RETIRAR -> false
+	protected boolean tipo;
+	protected Cuenta id_cuenta;
 
 	public Transaccion() {
 		super();
 	}
 
-	public Transaccion(int id, float importe, boolean tipo, LocalDate fecha) {
+	public Transaccion(Cuenta cuenta,float importe, boolean tipo) {
 		super();
-		this.id = id;
+		this.id_cuenta = cuenta;
 		this.importe = importe;
 		this.tipo = tipo;
-		this.fecha = fecha;
 	}
 
 	public int getId() {
@@ -46,13 +46,7 @@ public class Transaccion {
 		this.tipo = tipo;
 	}
 
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+	
 	
 
 	public Cuenta getId_cuenta() {
@@ -65,7 +59,7 @@ public class Transaccion {
 
 	@Override
 	public String toString() {
-		return "Transaccion [id=" + id + ", importe=" + importe + ", tipo=" + tipo + ", fecha=" + fecha + ", id_cuenta="
+		return "Transaccion [id=" + id + ", importe=" + importe + ", tipo=" + tipo + ", id_cuenta="
 				+ id_cuenta + "]";
 	}
 

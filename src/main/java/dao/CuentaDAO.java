@@ -1,9 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import conexionBD.Conexion;
 import conexionBD.UtilidadXml;
@@ -94,6 +96,9 @@ public class CuentaDAO extends Cuenta{
 			
 			if (opcion) {
 				float ingresar = CuentaDAO.getCuentaPorId(id).getSaldo() + cantidad;
+				//TRANSACCION DE INGRESAR DINERO
+				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
+				tr.guardarTrans();
 				try {
 					PreparedStatement q = con.prepareStatement(INGRESAR_RETIRAR);
 					q.setFloat(1, ingresar);
@@ -107,6 +112,9 @@ public class CuentaDAO extends Cuenta{
 			}else {
 				
 				float ingresar = CuentaDAO.getCuentaPorId(id).getSaldo() - cantidad;
+				//TRANSACCION DE RETIRAR DINERO
+				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
+				tr.guardarTrans();
 				try {
 					PreparedStatement q = con.prepareStatement(INGRESAR_RETIRAR);
 					q.setFloat(1, ingresar);
@@ -149,7 +157,7 @@ public class CuentaDAO extends Cuenta{
 
 		return result;
 	}
-	
+	/*
 	public  float verSaldoCuenta () {
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		CuentaDAO c = new CuentaDAO();
@@ -172,6 +180,6 @@ public class CuentaDAO extends Cuenta{
 
 		return result;
 	}
-	
+	*/
 
 }
