@@ -1,13 +1,16 @@
 package modelos;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Transaccion {
+public class Transaccion implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	protected int id;
 	protected float importe;
-	//INGRESAR -> true , RETIRAR -> false
 	protected boolean tipo;
 	protected Cuenta id_cuenta;
 
@@ -15,11 +18,12 @@ public class Transaccion {
 		super();
 	}
 
-	public Transaccion(Cuenta cuenta,float importe, boolean tipo) {
+	public Transaccion(int id, float importe, boolean tipo) {
 		super();
-		this.id_cuenta = cuenta;
+		this.id = id;
 		this.importe = importe;
 		this.tipo = tipo;
+
 	}
 
 	public int getId() {
@@ -46,8 +50,6 @@ public class Transaccion {
 		this.tipo = tipo;
 	}
 
-	
-	
 
 	public Cuenta getId_cuenta() {
 		return id_cuenta;
@@ -55,6 +57,21 @@ public class Transaccion {
 
 	public void setId_cuenta(Cuenta id_cuenta) {
 		this.id_cuenta = id_cuenta;
+	}
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transaccion other = (Transaccion) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 	@Override
