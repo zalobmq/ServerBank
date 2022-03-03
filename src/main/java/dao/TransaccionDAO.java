@@ -1,11 +1,9 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,10 @@ public class TransaccionDAO extends Transaccion{
 	
 	//SENTENCIAS
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final static String GUARDAR_TRANSACCION = "INSERT INTO transaccion (cuenta_id,importe,tipo)" + "VALUES (?,?,?)";
 	private final static String LS_TRANSAC_CUENTA = "SELECT * FROM transaccion WHERE id=?";
 	private final static String LS_TODAS_TRANSAC = "SELECT * FROM transaccion";

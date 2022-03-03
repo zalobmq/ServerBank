@@ -6,23 +6,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import conexionBD.Conexion;
 import conexionBD.UtilidadXml;
 import modelos.Cuenta;
+import modelos.Transaccion;
 import modelos.Usuario;
 
 public class CuentaDAO extends Cuenta{
 
 	// SENTENCIAS
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final static String CREAR_CUENTA = "INSERT INTO cuenta (id,saldo,usuario_id)" + "VALUES (?,?,?)";
 
 	private final static String BORRAR_CUENTA = "DELETE FROM cuenta WHERE id=?";
 
 	private final static String INGRESAR_RETIRAR = "UPDATE cuenta SET saldo=? WHERE id=?";
-
-	private final static String VER_SALDO = "SELECT saldo FROM cuenta WHERE id=?";
 	
 	private final static String CUENTA_X_ID = "SELECT * FROM cuenta WHERE id=?";
 		
@@ -31,11 +36,9 @@ public class CuentaDAO extends Cuenta{
 		super();
 	}
 
-	public CuentaDAO(float saldo, Usuario id_usuario) {
-		super(saldo,id_usuario);
-	}
-	public CuentaDAO(int id, float saldo, Usuario id_usuario) {
-		super(id,saldo,id_usuario);
+	
+	public CuentaDAO(float saldo, Usuario id_usuario,List<Transaccion> lista_Transacciones) {
+		super(saldo,id_usuario,lista_Transacciones);
 		
 	}
 	/*
@@ -157,29 +160,6 @@ public class CuentaDAO extends Cuenta{
 
 		return result;
 	}
-	/*
-	public  float verSaldoCuenta () {
-		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
-		CuentaDAO c = new CuentaDAO();
-		float result = 0f;
-
-		if (con != null) {
-			try {
-				PreparedStatement q = con.prepareStatement(CUENTA_X_ID);
-				q.setInt(1,this.id );
-				ResultSet rs = q.executeQuery();
-				while (rs.next()) {
-					c.setSaldo(rs.getFloat("saldo"));
-				}
-				result = c.getSaldo();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}
-	*/
+	
 
 }

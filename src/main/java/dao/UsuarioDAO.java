@@ -17,6 +17,11 @@ public class UsuarioDAO extends Usuario{
 
 	//SENTENCIAS SQL 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final  static String AÑADIR = "INSERT INTO usuario (id_card,nombre,pin,dni,id_admin)"
 											+ "VALUES (?,?,?,?,?)";
 	
