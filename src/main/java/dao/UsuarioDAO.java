@@ -107,7 +107,7 @@ public class UsuarioDAO extends Usuario{
 	 * Recibe un String id_card
 	 * Devuelve un UsuarioDAO
 	 */
-	public static UsuarioDAO getUsuarioPorId_card(String id_card) {
+	public static  UsuarioDAO getUsuarioPorId_card(String id_card) {
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		UsuarioDAO result = new UsuarioDAO();
 
@@ -171,7 +171,7 @@ public class UsuarioDAO extends Usuario{
 	 * Devuelve un Boolean true si el usuario con ese id tiene ese pin.
 	 * 
 	 */
-	public static Boolean comprobarPin(String id_card, int pin) {
+	public  Boolean comprobarPin(String id_card, int pin) {
 		Connection con = Conexion.getConexion(UtilidadXml.loadFile("conexion.xml"));
 		
 		UsuarioDAO a = new UsuarioDAO();

@@ -2,7 +2,7 @@ package utils;
 
 public class GeneradorIdCard {
 	
-	public  String generador(String dni , String nombre) {
+	public static String generador(String dni , String nombre) {
 		
 		String valor1 = "000";
 		String valor2 = dni.substring(0,4);

@@ -99,9 +99,7 @@ public class CuentaDAO extends Cuenta{
 			
 			if (opcion) {
 				float ingresar = CuentaDAO.getCuentaPorId(id).getSaldo() + cantidad;
-				//TRANSACCION DE INGRESAR DINERO
-				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
-				tr.guardarTrans();
+				
 				try {
 					PreparedStatement q = con.prepareStatement(INGRESAR_RETIRAR);
 					q.setFloat(1, ingresar);
@@ -112,12 +110,14 @@ public class CuentaDAO extends Cuenta{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				//TRANSACCION DE INGRESAR DINERO
+
+				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
+				tr.guardarTrans();
 			}else {
 				
 				float ingresar = CuentaDAO.getCuentaPorId(id).getSaldo() - cantidad;
-				//TRANSACCION DE RETIRAR DINERO
-				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
-				tr.guardarTrans();
+				
 				try {
 					PreparedStatement q = con.prepareStatement(INGRESAR_RETIRAR);
 					q.setFloat(1, ingresar);
@@ -128,6 +128,9 @@ public class CuentaDAO extends Cuenta{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				//TRANSACCION DE RETIRAR DINERO
+				TransaccionDAO tr = new TransaccionDAO(CuentaDAO.getCuentaPorId(id),cantidad, opcion);
+				tr.guardarTrans();
 			}
 		}
 		return result;
